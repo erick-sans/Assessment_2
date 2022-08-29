@@ -1,3 +1,4 @@
+from config import api_key
 from dataclasses import dataclass
 from bs4 import BeautifulSoup
 import requests
@@ -161,6 +162,7 @@ class HolidayList:
 
     # fx to convert weeknumber into a range between two days, use Try/Except, query weatherAPI & returnformat info
     def getWeather(self,weekNum):
+        global api_key
         CurrentDate = datetime.datetime.now()
 
         weekNum = int(CurrentDate.strftime("%U"))
@@ -172,7 +174,7 @@ class HolidayList:
 
         dates = [startdate.strftime('%Y-%m-%d'), enddate.strftime('%Y-%m-%d')]
 
-        response = requests.get(f'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/11420/{dates[0]}/{dates[1]}?key=9FV5LBY3CVWGWT92ZTR757AYA')
+        response = requests.get(f'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/11420/{dates[0]}/{dates[1]}?key={api_key}')
 
         weather = []        
         for day in response.json()['days']:
@@ -377,33 +379,5 @@ def main():
                     else:
                         print("Input not recognized. Please type y or n")
 
-            
-
-            
-    
-
-
 if __name__ == "__main__":
     main()
-
-
-# Additional Hints:
-# ---------------------------------------------
-# You may need additional helper functions both in and out of the classes, add functions as you need to.
-#
-# No one function should be more then 50 lines of code, if you need more then 50 lines of code
-# excluding comments, break the function into multiple functions.
-#
-# You can store your raw menu text, and other blocks of texts as raw text files 
-# and use placeholder values with the format option.
-# Example:
-# In the file test.txt is "My name is {fname}, I'm {age}"
-# Then you later can read the file into a string "filetxt"
-# and substitute the placeholders 
-# for example: filetxt.format(fname = "John", age = 36)
-# This will make your code far more readable, by seperating text from code.
-
-
-
-
-
