@@ -3,6 +3,7 @@
 This repository contains Python code for initiating and maintaining a dynamic holidays list. 
 
 Features include:
+    
     1. Reading starter holidays from a json file and creating holiday object instances from those holidays.
 
     2. Scraping a website for all holidays and associated dates between 2020 and 2024 to add to the holiday list object
